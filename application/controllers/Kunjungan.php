@@ -11,13 +11,21 @@ class kunjungan extends CI_Controller
         date_default_timezone_set('Asia/Jakarta');
         is_role(['administrator', 'sales']);
         $this->load->model('MainModel', 'main');
+        $this->load->model('KunjunganModel', 'model');
         $this->form_validation->set_error_delimiters('<small class="text-danger">', '</small>');
     }
 
     public function index()
     {
         $data['title'] = "kunjungan";
-        $data['kunjungan'] = $this->main->get('kunjungan');
+        $nama = userdata()->nama;
+        $role = userdata()->level;
+        if($role == "sales"){
+            $data['kunjungan'] = $this->model->getKunjungan(['nama_sales' => $nama]);
+        }else{
+            $data['kunjungan'] = $this->model->getKunjunganAll();
+        }
+    
 
         template_view('kunjungan/index', $data);
     }
