@@ -18,8 +18,13 @@ class Transaksi extends CI_Controller
     public function index()
     {
         $data['title'] = "Pesanan Penjualan";
-        $data['transaksi'] = $this->transaksi->getTransaksi();
-
+        $idUser = userdata()->idUser;
+        $role = userdata()->level;
+        if($role == 'sales'){
+            $data['transaksi'] = $this->transaksi->getTransaksi(null, $idUser);
+        }else{
+            $data['transaksi'] = $this->transaksi->getTransaksi(null, null);
+        }
         template_view('transaksi/index', $data);
     }
 
@@ -27,7 +32,8 @@ class Transaksi extends CI_Controller
     {
         $data['title'] = "Transaksi";
         $data['idTransaksi'] = $id;
-        $data['transaksi'] = $this->transaksi->getTransaksi($id);
+        $idUser = userdata()->idUser;
+        $data['transaksi'] = $this->transaksi->getTransaksi($id, $idUser);
         $data['detail'] = $this->transaksi->getDetailTransaksi($id);
 
         template_view('transaksi/detail', $data);

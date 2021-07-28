@@ -43,9 +43,13 @@ class TransaksiModel extends CI_Model
         return array_sum($subtotal);
     }
 
-    public function getTransaksi($id = null)
+    public function getTransaksi($id = null, $idUser)
     {
+        
         if ($id == null) {
+            if($idUser != null){
+                $this->db->where(['idUser' => $idUser]);
+            }
             return $this->db->get('transaksi')->result();
         } else {
             $this->db->join('user u', 'u.idUser=t.idUser');
