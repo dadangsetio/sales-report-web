@@ -10,9 +10,11 @@
                         </h3>
                     </div>
                     <div class="col text-right">
-                        <a href="<?= base_url('kunjungan/add') ?>" class="btn btn-sm btn-primary">
-                            <i class="fas fa-plus"></i> Tambah Data
-                        </a>
+                        <?php if (menu_role(['sales'])) : ?>
+                            <a href="<?= base_url('kunjungan/add') ?>" class="btn btn-sm btn-primary">
+                                <i class="fas fa-plus"></i> Tambah Data
+                            </a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
