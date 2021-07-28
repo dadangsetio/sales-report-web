@@ -51,8 +51,8 @@ class Transaksi extends CI_Controller
         $idUser = userdata()->idUser;
         $idTransaksi = generate_id("T", "transaksi", "idTransaksi", date('ymd'), 3);
 
-        $data['keranjang'] = $this->transaksi->getKeranjang(['idUser' => $idUser]);
-        $data['total_harga'] = $this->transaksi->getTotalKeranjang(['idUser' => $idUser]);
+        $data['keranjang'] = $this->transaksi->getKeranjang($idUser);
+        $data['total_harga'] = $this->transaksi->getTotalKeranjang($idUser);
 
         $this->form_validation->set_rules('namaPelanggan', 'Nama Pelanggan', 'required');
         $this->form_validation->set_rules('alamatPelanggan', 'Alamat Pelanggan', 'required');

@@ -4,11 +4,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class TransaksiModel extends CI_Model
 {
 
-    public function getKeranjang($where)
+    public function getKeranjang($id)
     {
         $this->db->select('k.noItem, b.kdBarang, b.namaBarang, b.harga, k.qty');
         $this->db->join('barang b', 'k.kdBarang=b.kdBarang');
-        return $this->db->get_where('keranjang k', $where)->result();
+        return $this->db->get_where('keranjang k', ['k.idUser' => $id])->result();
     }
 
     public function getBarang()
@@ -30,10 +30,10 @@ class TransaksiModel extends CI_Model
         return $this->db->update('keranjang', ['qty' => $result], $where);
     }
 
-    public function getTotalKeranjang($where)
+    public function getTotalKeranjang($id)
     {
         $this->db->join('barang b', 'b.kdBarang=k.kdBarang');
-        $keranjang = $this->db->get_where('keranjang k', $where)->result();
+        $keranjang = $this->db->get_where('keranjang k', ['k.idUser' => $id])->result();
 
         $subtotal = [];
         foreach ($keranjang as $k) {
