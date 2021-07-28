@@ -1,10 +1,6 @@
-<html>
-
-<head>
+<html><head>
     <title>Laporan Transaksi</title>
-</head>
-
-<body>
+</head><body>
     <style type="text/css">
         table {
             width: 100%;
@@ -70,7 +66,4 @@
             </tr>
         <?php endforeach; ?>
     </table>
-
-</body>
-
-</html>
+</body></html>
