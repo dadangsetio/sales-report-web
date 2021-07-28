@@ -7,7 +7,9 @@ class BarangModel extends CI_Model
     public function getBarang($isAccept = 1)
     {
         $this->db->where('isAccept', $isAccept);
-        return $this->db->get('barang')->result();
+        $this->db->join('user u', 'b.idUser=u.idUser');
+        $this->db->select("b.kdBarang, b.namaBarang, b.harga, u.nama");
+        return $this->db->get('barang b')->result();
     }
 
     public function accept($getId)

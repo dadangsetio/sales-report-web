@@ -19,6 +19,7 @@
                             <th>Kode Barang</th>
                             <th>Nama Barang</th>
                             <th>Harga</th>
+                            <th>Di Buat</th>
                             <th>Opsi</th>
                         </tr>
                     </thead>
@@ -31,6 +32,7 @@
                                 <td><?= $row->kdBarang; ?></td>
                                 <td><?= $row->namaBarang; ?></td>
                                 <td>Rp. <?= number_format($row->harga, '0', ',', '.'); ?></td>
+                                <td><?= $row->nama; ?></td>
                                 <td>
                                     <div class="btn-group">
                                     <a href="<?= base_url('request/accept/') . $row->kdBarang ?>" class="btn btn-sm btn-primary">

@@ -39,6 +39,7 @@ class Barang extends CI_Controller
         $data['title'] = "Barang";
         $data['kategori'] = $this->main->get('kategori');
         $data['kdBarang'] = $kdBarang;
+        $idUser = userdata()->idUser;
 
         $this->_validasi();
         if ($this->form_validation->run() == false) {
@@ -46,7 +47,7 @@ class Barang extends CI_Controller
         } else {
             $input = $this->input->post(null, true);
             $input['kdBarang'] = $kdBarang;
-
+            $input['idUser'] = $idUser;
             $save = $this->main->insert('barang', $input);
             if ($save) {
                 msgBox('save');
