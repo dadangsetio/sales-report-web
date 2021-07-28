@@ -17,8 +17,13 @@ class Dashboard extends CI_Controller
     public function index()
     {
         $data['title'] = "Dashboard";
-        $data['total_transaksi'] = $this->transaksi->getTotalTransaksi(date('Y-m'));
-
+        $idUser = userdata()->idUser;
+        $role = userdata()->level;
+        if($role == 'sales'){
+            $data['total_transaksi'] = $this->transaksi->getTotalTransaksi(date('Y-m'), null, $idUser);
+        }else{
+            $data['total_transaksi'] = $this->transaksi->getTotalTransaksi(date('Y-m'));
+        }
         $bln = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
         $data['tr'] = [];
         foreach ($bln as $b) {

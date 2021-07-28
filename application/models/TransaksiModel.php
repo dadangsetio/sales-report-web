@@ -88,7 +88,7 @@ class TransaksiModel extends CI_Model
         return $this->db->get('transaksi t')->result();
     }
 
-    public function getTotalTransaksi($bln = null, $custom = [])
+    public function getTotalTransaksi($bln = null, $custom = [], $idUser = null)
     {
         if ($bln != null) {
             $this->db->like('tanggal', $bln, 'after');
@@ -96,6 +96,9 @@ class TransaksiModel extends CI_Model
         if ($custom != null) {
             $this->db->where('tanggal' . ' >=', $custom[0]);
             $this->db->where('tanggal' . ' <=', $custom[1]);
+        }
+        if($idUser != null){
+            $this->db->where(["idUser"=>$idUser]);
         }
         $this->db->select_sum('totalHarga', 'totalTransaksi');
         return $this->db->get('transaksi')->row()->totalTransaksi;
