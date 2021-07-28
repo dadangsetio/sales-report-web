@@ -12,13 +12,14 @@ class Barang extends CI_Controller
         is_role(['administrator', 'sales']);
 
         $this->load->model('MainModel', 'main');
+        $this->load->model('BarangModel', 'barang');
         $this->form_validation->set_error_delimiters('<small class="text-danger">', '</small>');
     }
 
     public function index()
     {
         $data['title'] = "Barang";
-        $data['barang'] = $this->main->get('barang');
+        $data['barang'] = $this->barang->getBarang(1);
         $data['kategori'] = $this->main->get('kategori');
 
         template_view('barang/index', $data);
