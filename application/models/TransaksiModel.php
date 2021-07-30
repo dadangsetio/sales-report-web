@@ -54,7 +54,7 @@ class TransaksiModel extends CI_Model
         } else {
             $this->db->join('user u', 'u.idUser=t.idUser');
             return $this->db->get_where('transaksi t', ['idTransaksi' => $id])->row();
-        }
+        } 
     }
 
     // public function getTotalHarga($id)
@@ -78,12 +78,16 @@ class TransaksiModel extends CI_Model
         return $this->db->get('transaksi_detail td')->result();
     }
 
-    public function getLaporanTransaksi($tgl1, $tgl2)
+    public function getLaporanTransaksi($tgl1, $tgl2, $idUser = null)
     {
+        
         $this->db->join('user u', 'u.idUser=t.idUser');
         if ($tgl1 != null && $tgl2 != null) {
             $this->db->where('tanggal' . ' >=', $tgl1);
             $this->db->where('tanggal' . ' <=', $tgl2);
+        }
+        if($idUser != null){
+            $this->db->where('t.idUser', $idUser);
         }
         return $this->db->get('transaksi t')->result();
     }

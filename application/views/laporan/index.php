@@ -20,6 +20,15 @@
                     </div>
                     <?= form_error('tanggal'); ?>
                 </div>
+                <label for="nama_sales">Nama Sales</label>
+                        <select id="nama_sales" name="nama_sales" class="form-control">
+                            <option value="">Pilih Sales</option>
+                            <?php foreach ($user as $u) : ?>
+                                <option value="<?= $u->idUser ?>"><?= $u->nama ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?= form_error('nama_sales'); ?>
+                    </div>
                 <button type="submit" class="btn btn-block btn-primary">Cetak <i class="fa fa-fw fa-print"></i></button>
                 <?= form_close(); ?>
             </div>

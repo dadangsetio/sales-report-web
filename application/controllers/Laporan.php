@@ -16,7 +16,7 @@ class Laporan extends CI_Controller
     public function index()
     {
         $data['title'] = "Laporan";
-
+        $data['user'] = $this->main->get('user');
         $this->form_validation->set_rules('tanggal', 'Tanggal', 'required');
         $this->form_validation->set_message('required', 'Kolom {field} harus diisi');
 
@@ -27,19 +27,25 @@ class Laporan extends CI_Controller
             $tgl    = explode(' - ', $input['tanggal']);
             $tgl1   = date('Y-m-d', strtotime($tgl[0]));
             $tgl2   = date('Y-m-d', strtotime(end($tgl)));
-
-            $this->cetak_transaksi($tgl1, $tgl2);
+            $idUser = $input['nama_sales'];
+            $this->cetak_transaksi($tgl1, $tgl2, $idUser);
         }
     }
 
-    public function cetak_transaksi($tgl1, $tgl2)
+    public function cetak_transaksi($tgl1, $tgl2, $idUser)
     {
         $this->load->library('Dompdf_gen');
 
         $data['tanggal'] = indo_date($tgl1) . " s/d " . indo_date($tgl2);
-        $data['transaksi'] = $this->transaksi->getLaporanTransaksi($tgl1, $tgl2);
+        if($idUser == null){
+            $data['transaksi'] = $this->transaksi->getLaporanTransaksi($tgl1, $tgl2);
+            $data['total'] = $this->transaksi->getTotalTransaksi(null, [$tgl1, $tgl2]);
+        }else{
+            $data['transaksi'] = $this->transaksi->getLaporanTransaksi($tgl1, $tgl2, $idUser);
+            $data['total'] = $this->transaksi->getTotalTransaksi(null, [$tgl1, $tgl2], $idUser);
+        }
         $data['jumlah'] = count((array) $data['transaksi']);
-        $data['total'] = $this->transaksi->getTotalTransaksi(null, [$tgl1, $tgl2]);
+        
         $this->load->view('laporan/laporan_transaksi', $data);
 
         $paper_size = 'A4'; // ukuran kertas
