@@ -35,15 +35,15 @@
                                 <td><?= $row->nama; ?></td>
                                 <td>
                                     <div class="btn-group">
-                                    <a href="<?= base_url('request/accept/') . $row->kdBarang ?>" class="btn btn-sm btn-primary">
+                                        <a href="<?= base_url('request/accept/') . $row->kdBarang ?>" class="btn btn-sm btn-primary <?php if (menu_role(['sales'])) : ?>disabled<?php endif; ?>">
                                             Accept
                                         </a>
-                                        <a href="<?= base_url('request/edit/') . $row->kdBarang ?>" class="btn btn-sm btn-secondary">
-                                            <i class="fa fa-edit"></i>
-                                        </a>
                                         <?php if (menu_role(['administrator'])) : ?>
+                                            <a href="<?= base_url('request/edit/') . $row->kdBarang ?>" class="btn btn-sm btn-secondary">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
                                             <a onclick="return confirm('Yakin ingin hapus data?')" href="<?= base_url('barang/hapus/') . $row->kdBarang ?>" class="btn btn-sm btn-secondary">
-                                                <i class="fa fa-trash"></i>
+                                                    <i class="fa fa-trash"></i>
                                             </a>
                                         <?php endif; ?>
                                     </div>

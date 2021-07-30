@@ -27,12 +27,10 @@
                         <div class="collapse <?= open_dropdown(['kategori', 'satuan', 'barang'], 'show'); ?>" id="collapseMaster" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
                             <nav class="sb-sidenav-menu-nested nav ml-0">
                             <?php endif; ?>
-                            <?php if (menu_role(['administrator'])) : ?>
-                                <a class="nav-link" href="<?= base_url('request'); ?>">
+                            <a class="nav-link" href="<?= base_url('request'); ?>">
                                     <div class="sb-nav-link-icon"><i class="fas fa-fw fa-file"></i></div>
                                     Request
                                 </a>
-                            <?php endif; ?>
                             <?php if (menu_role(['administrator'])) : ?>
                                 <a class="nav-link" href="<?= base_url('kategori'); ?>">
                                     <div class="sb-nav-link-icon"><i class="fas fa-fw fa-tags"></i></div>

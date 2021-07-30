@@ -7,7 +7,6 @@ class Request extends CI_Controller
     {
         parent::__construct();
         is_logged_in();
-        is_role(['administrator']);
         $this->load->model('MainModel', 'main');
         $this->load->model('BarangModel', 'barang');
         $this->form_validation->set_error_delimiters('<small class="text-danger">', '</small>');
