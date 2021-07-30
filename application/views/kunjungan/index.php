@@ -10,7 +10,7 @@
                         </h3>
                     </div>
                     <div class="col text-right">
-                        <?php if (menu_role(['sales'])) : ?>
+                        <?php if (menu_role(['administrator'])) : ?>
                             <a href="<?= base_url('kunjungan/add') ?>" class="btn btn-sm btn-primary">
                                 <i class="fas fa-plus"></i> Tambah Data
                             </a>
@@ -30,9 +30,7 @@
                             <th>Nama Sales</th>
                             <th>Tanggal Kunjungan</th>
                             <th>Jam Kunjungan</th>
-                            <?php if (menu_role(['administrator'])) : ?>
-                                <th>Hapus</th>
-                            <?php endif; ?>
+                            <th>Opsi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,11 +48,22 @@
                                 <td><?= $row->jam_kunjungan; ?></td>
                                 <td>
                                     <div class="btn-group">
+                                        <?php if ($row->isDone == 0) : ?>
+                                            <a href="<?= base_url('kunjungan/accept/') . $row->idkunjungan ?>" class="btn btn-sm btn-primary <?php if (menu_role(['administrator'])) : ?>disabled<?php endif; ?>">
+                                                Accept
+                                            </a>
+                                        <?php endif; ?>
+                                        <?php if ($row->isDone == 1) : ?>
+                                            <a href="<?= base_url('kunjungan/accept/') . $row->idkunjungan ?>" class="btn btn-sm btn-success disabled">
+                                                Done
+                                            </a>
+                                        <?php endif; ?>
                                         <?php if (menu_role(['administrator'])) : ?>
                                             <a onclick="return confirm('Yakin ingin hapus data?')" href="<?= base_url('kunjungan/hapus/') . $row->idkunjungan ?>" class="btn btn-sm btn-secondary">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         <?php endif; ?>
+                                    
                                     </div>
                                 </td>
                             </tr>

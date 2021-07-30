@@ -25,7 +25,6 @@ class kunjungan extends CI_Controller
         }else{
             $data['kunjungan'] = $this->model->getKunjunganAll();
         }
-    
 
         template_view('kunjungan/index', $data);
     }
@@ -34,12 +33,14 @@ class kunjungan extends CI_Controller
     {
         $this->form_validation->set_rules('nama_cv', 'Nama Perusahaan', 'required|trim');
         $this->form_validation->set_rules('nama_client', 'Nama Client', 'required|trim');
+        $this->form_validation->set_rules('nama_sales', 'Nama Sales', 'required|trim');
+        $this->form_validation->set_message('required', 'Kolom {field} harus diisi');
     }
 
     public function add()
     {
         $data['title'] = "Kunjungan";
-
+        $data['user'] = $this->main->get('user');
         $this->_validasi();
         if ($this->form_validation->run() == false) {
             template_view('kunjungan/add', $data);
@@ -95,6 +96,12 @@ class kunjungan extends CI_Controller
             redirect('kunjungan/add');
         }
 
+        redirect('kunjungan');
+    }
+
+    public function accept($getId){
+        $id = encode_php_tags($getId);
+        $this->model->accept($id);
         redirect('kunjungan');
     }
 }

@@ -55,6 +55,12 @@
 <script src="<?= base_url('assets/') ?>js/scripts.js"></script>
 <!-- Sweetalert2 -->
 <script src="<?= base_url(); ?>assets/vendor/sweetalert2/sweetalert2.all.min.js"></script>
+
+<script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+    <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <?= $this->session->flashdata('pesan'); ?>
 
 <script type="text/javascript">
@@ -89,6 +95,16 @@
         }, cb);
 
         cb(start, end);
+
+        $('#tgl_kunjungan').datepicker({
+            format: 'mm/dd/yyyy',
+            startDate: '-3d'
+        });
+        $('#tgl_kunjungan').val(start.format('YYYY-MM-DD'));
+
+        $('#jam_kunjungan').timepicker({
+            uiLibrary: 'bootstrap4'
+        });
 
         // Bootstrap
         $('[data-toggle="tooltip"]').tooltip();

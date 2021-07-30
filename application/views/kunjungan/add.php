@@ -1,5 +1,4 @@
-<?php if (menu_role(['sales'])) : ?>
-    <div class="row justify-content-center">
+<div class="row justify-content-center">
         <div class="col-md-5">
             <div class="card">
                 <div class="card-header bg-white">
@@ -39,16 +38,22 @@
                         <?= form_error('alamat'); ?>
                     </div>
                     <div class="form-group">
-                        <label for="nama_sales">Nama Sales</label>
-                        <input type="text" name="nama_sales" value="<?= userdata()->nama; ?>" id="nama_sales" readonly class="form-control">
+                    <label for="nama_sales">Nama Sales</label>
+                        <select id="nama_sales" name="nama_sales" class="form-control">
+                            <option value="">Pilih Sales</option>
+                            <?php foreach ($user as $u) : ?>
+                                <option value="<?= $u->nama ?>"><?= $u->nama ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <?= form_error('nama_sales'); ?>
                     </div>
                     <div class="form-group">
                         <label for="tgl_kunjungan">Tanggal Kunjungan</label>
-                        <input type="text" name="tgl_kunjungan" value="<?= date('d/m/Y') ?>" id="tgl_kunjungan" readonly class="form-control">
+                        <input type="text" value="<?= set_value('tgl_kunjungan'); ?>" name="tgl_kunjungan" id="tgl_kunjungan" class="form-control">
                     </div>
                     <div class="form-group">
                         <label for="jam_kunjungan">Jam Kunjungan</label>
-                        <input type="text" name="jam_kunjungan" value="<?= date('H:i:s') ?>" id="jam_kunjungan" readonly class="form-control">
+                        <input type="text" name="jam_kunjungan" value="<?= date('H:i') ?>" id="jam_kunjungan" readonly class="form-control">
                     </div>
 
                     <button type="submit" class="btn btn-block btn-primary">Simpan</button>
@@ -57,4 +62,4 @@
             </div>
         </div>
     </div>
-<?php endif; ?>
+</div>

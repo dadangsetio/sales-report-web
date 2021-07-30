@@ -13,4 +13,10 @@ class KunjunganModel extends CI_Model
     {
         return $this->db->get('kunjungan')->result();
     }
+
+    public function accept($getId)
+    {
+        $where = ['idkunjungan' => $getId];
+        $this->db->update('kunjungan', ['isDone' => 1], $where);
+    }
 }
